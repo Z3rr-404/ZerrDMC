@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<title>ZerrDMC Official V3</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -15,38 +17,49 @@ box-sizing:border-box;
 scroll-behavior:smooth;
 }
 
+:root{
+--verde:#55ff55;
+--negro:#050505;
+--gris:#121212;
+--glass:rgba(255,255,255,.05);
+}
+
 body{
-background:#0a0a0a;
+font-family:'Poppins',sans-serif;
+background:#050505;
 color:white;
-font-family:Arial,sans-serif;
 overflow-x:hidden;
 }
 
-/* Fondo animado */
+/* Fondo */
 
 body::before{
 content:"";
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
+inset:0;
+background:
+radial-gradient(circle at top,#0f3d0f,#050505 70%);
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
 background:
 linear-gradient(
 45deg,
-#0a0a0a,
-#111,
-#0a0a0a
+transparent,
+rgba(85,255,85,.03),
+transparent
 );
-background-size:400% 400%;
-animation:fondo 12s ease infinite;
+animation:bgMove 10s linear infinite;
 z-index:-1;
 }
 
-@keyframes fondo{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+@keyframes bgMove{
+0%{transform:translateX(-100%);}
+100%{transform:translateX(100%);}
 }
 
 /* NAV */
@@ -55,25 +68,25 @@ nav{
 position:fixed;
 top:0;
 width:100%;
-background:rgba(0,0,0,.92);
+padding:18px;
 display:flex;
 justify-content:center;
-flex-wrap:wrap;
-gap:20px;
-padding:15px;
+gap:25px;
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(12px);
 z-index:999;
-border-bottom:2px solid #55ff55;
+border-bottom:1px solid rgba(85,255,85,.2);
 }
 
 nav a{
 color:white;
 text-decoration:none;
-font-weight:bold;
+font-weight:600;
 transition:.3s;
 }
 
 nav a:hover{
-color:#55ff55;
+color:var(--verde);
 }
 
 /* HERO */
@@ -87,147 +100,232 @@ text-align:center;
 padding:120px 20px;
 }
 
+.hero-content{
+max-width:900px;
+}
+
+.logo{
+width:220px;
+margin-bottom:30px;
+filter:
+drop-shadow(0 0 25px rgba(85,255,85,.35));
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-12px);
+}
+}
+
 .hero h1{
-font-family:'Press Start 2P';
-font-size:clamp(1rem,4vw,3rem);
-line-height:1.8;
-text-align:center;
-word-break:normal;
+font-size:clamp(2rem,6vw,5rem);
+font-weight:700;
+}
+
+.hero h1 span{
+color:var(--verde);
 }
 
 .hero p{
 margin-top:20px;
-font-size:1.1rem;
+font-size:1.2rem;
+opacity:.85;
 }
 
 .btn{
 display:inline-block;
-margin-top:25px;
-padding:15px 30px;
-background:#55ff55;
+margin-top:30px;
+padding:16px 34px;
+border-radius:14px;
+background:var(--verde);
 color:black;
-font-weight:bold;
-border-radius:10px;
+font-weight:700;
 text-decoration:none;
 transition:.3s;
 }
 
 .btn:hover{
-transform:scale(1.08);
+transform:translateY(-4px);
+box-shadow:
+0 0 30px rgba(85,255,85,.5);
 }
 
 /* TITULOS */
 
 .titulo{
+font-size:2.4rem;
 text-align:center;
-font-size:2rem;
-color:#55ff55;
-margin-bottom:40px;
+margin-bottom:50px;
+color:var(--verde);
 }
 
 /* SECCIONES */
 
 section{
-padding:80px 20px;
+padding:90px 20px;
+}
+
+/* STATS */
+
+.stats{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.stat{
+background:var(--glass);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:20px;
+text-align:center;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.stat h3{
+font-size:2rem;
+color:var(--verde);
 }
 
 /* CARDS */
 
 .cards{
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
 max-width:1200px;
 margin:auto;
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
 }
 
 .card{
-background:#151515;
-padding:25px;
-border-radius:15px;
-border:1px solid #333;
-transition:.3s;
+background:var(--glass);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+transition:.4s;
 }
 
 .card:hover{
 transform:translateY(-10px);
-border-color:#55ff55;
-box-shadow:0 0 20px rgba(85,255,85,.3);
+border-color:var(--verde);
+box-shadow:
+0 0 30px rgba(85,255,85,.15);
+}
+
+.card h3{
+margin-bottom:15px;
+color:var(--verde);
 }
 
 /* GALERIA */
 
 .galeria{
-display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(280px,1fr));
-gap:15px;
 max-width:1200px;
 margin:auto;
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
 }
 
 .galeria img{
 width:100%;
-border-radius:12px;
+height:250px;
+object-fit:cover;
+border-radius:20px;
+transition:.4s;
 }
 
-/* YOUTUBE */
+.galeria img:hover{
+transform:scale(1.05);
+}
+
+/* VIDEO */
 
 .video{
-max-width:900px;
+max-width:1000px;
 margin:auto;
 }
 
 .video iframe{
 width:100%;
-height:500px;
+height:550px;
 border:none;
-border-radius:15px;
+border-radius:20px;
+}
+
+/* DESCARGAS */
+
+.download{
+text-align:center;
+}
+
+.download a{
+display:inline-block;
+margin:10px;
+padding:15px 25px;
+background:#151515;
+border:1px solid #333;
+color:white;
+text-decoration:none;
+border-radius:14px;
+transition:.3s;
+}
+
+.download a:hover{
+border-color:var(--verde);
 }
 
 /* FOOTER */
 
 footer{
-padding:30px;
+padding:40px;
 text-align:center;
-background:#000;
-border-top:2px solid #55ff55;
+background:black;
+border-top:1px solid rgba(85,255,85,.3);
 }
 
-/* BOTON ARRIBA */
+/* TOP */
 
 .top{
 position:fixed;
-right:20px;
-bottom:20px;
-background:#55ff55;
-color:black;
-width:50px;
-height:50px;
+bottom:25px;
+right:25px;
+width:55px;
+height:55px;
 border-radius:50%;
+background:var(--verde);
+color:black;
+font-weight:bold;
 display:flex;
 align-items:center;
 justify-content:center;
 text-decoration:none;
-font-size:22px;
-font-weight:bold;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 
 @media(max-width:768px){
 
 .video iframe{
-height:250px;
+height:260px;
 }
 
-.titulo{
-font-size:1.6rem;
+.logo{
+width:160px;
 }
 
-.hero p{
-font-size:1rem;
+.hero h1{
+font-size:2.2rem;
 }
 
 }
@@ -242,22 +340,21 @@ font-size:1rem;
 <a href="#videos">Videos</a>
 <a href="#galeria">Galería</a>
 <a href="#descargas">Descargas</a>
-<a href="#redes">Redes</a>
 </nav>
 
 <section class="hero" id="inicio">
 
-<div>
+<div class="hero-content">
 
-<h1>ZerrDMC_Official</h1>
+<img src="logo.png" class="logo">
+
+<h1>Zerr<span>DMC</span> Official</h1>
 
 <p>
-Minecraft PS3 Edition • Tutoriales • Mods • FTP • Mundos • Comunidad
+Minecraft PS3 Edition • Mods • FTP • Tutoriales • Comunidad
 </p>
 
-<a class="btn"
-href="https://instagram.com/zerrdmc_"
-target="_blank">
+<a href="https://instagram.com/zerrdmc_" target="_blank" class="btn">
 Instagram Oficial
 </a>
 
@@ -265,26 +362,109 @@ Instagram Oficial
 
 </section>
 
+<section>
+
+<h2 class="titulo">Estadísticas</h2>
+
+<div class="stats">
+
+<div class="stat">
+<h3>100+</h3>
+<p>Videos</p>
+</div>
+
+<div class="stat">
+<h3>500+</h3>
+<p>Miembros</p>
+</div>
+
+<div class="stat">
+<h3>50+</h3>
+<p>Mapas</p>
+</div>
+
+</div>
+
+</section>
+
 <section id="contenido">
 
-<h2 class="titulo">Contenido del Canal</h2>
+<h2 class="titulo">Contenido</h2>
 
 <div class="cards">
 
 <div class="card">
-🏰 Mapas PS3
-<br><br>
-Descargas exclusivas.
+<h3>🏰 Mapas PS3</h3>
+<p>Descargas exclusivas y actualizadas.</p>
 </div>
 
 <div class="card">
-⚔️ Survival
-<br><br>
-Series y desafíos.
+<h3>⚔️ Survival</h3>
+<p>Series, retos y aventuras.</p>
 </div>
 
 <div class="card">
-🛠 Tutoriales
+<h3>🛠 Tutoriales</h3>
+<p>FTP, HEN y personalización.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="videos">
+
+<h2 class="titulo">Último Video</h2>
+
+<div class="video">
+
+<iframe
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</section>
+
+<section id="galeria">
+
+<h2 class="titulo">Galería</h2>
+
+<div class="galeria">
+
+<img src="https://picsum.photos/600/400?1">
+<img src="https://picsum.photos/600/400?2">
+<img src="https://picsum.photos/600/400?3">
+
+</div>
+
+</section>
+
+<section id="descargas">
+
+<h2 class="titulo">Descargas</h2>
+
+<div class="download">
+
+<a href="#">Mundo Survival</a>
+<a href="#">Mapa Medieval</a>
+<a href="#">Mapa PvP</a>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 ZerrDMC Official - Todos los derechos reservados
+
+</footer>
+
+<a href="#inicio" class="top">↑</a>
+
+</body>
+</html>/🛠 Tutoriales
 <br><br>
 FTP, HEN y personalización.
 </div>
